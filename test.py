@@ -60,6 +60,20 @@ class Tests(unittest.TestCase):
         self.assertEqual(result.stdout, "123\n456\n789\n10")
         self.assertEqual(result.stderr, "")
 
+    def test_trailingSpace(self):
+        s = "12345 "
+        result = self.r(["-L", "3", "-w"], s)
+        self.assertEqual(result.returncode, 0)
+        self.assertEqual(result.stdout, "123\n45 ")
+        self.assertEqual(result.stderr, "")
+
+    def test_trailingSpaceAndLeadingNewLines(self):
+        s = "\n\n\n12345 "
+        result = self.r(["-L", "3", "-w"], s)
+        self.assertEqual(result.returncode, 0)
+        self.assertEqual(result.stdout, "123\n45 ")
+        self.assertEqual(result.stderr, "")
+
     def test_errorPriority(self):
         result = self.r(["-Q", "{", "}o"], None)
         self.assertEqual(result.returncode, 1)
