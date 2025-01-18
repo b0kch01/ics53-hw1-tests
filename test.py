@@ -87,6 +87,13 @@ class Tests(unittest.TestCase):
         self.assertEqual(result.stderr, "")
         self.assertEqual(result.stdout, "hel\nl\no")
 
+    def test_eofendquote(self):
+        s = "$one$two$three$four$"
+        result = self.r(["-Q", "$", "$"], s)
+        self.assertEqual(result.returncode, 0)
+        self.assertEqual(result.stderr, "")
+        self.assertEqual(result.stdout, "one\nthree\n\n")
+
 
 if __name__ == "__main__":
     with open('./rsrc/test1.txt', "w") as file:
