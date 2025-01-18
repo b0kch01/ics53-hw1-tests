@@ -94,6 +94,20 @@ class Tests(unittest.TestCase):
         self.assertEqual(result.stderr, "")
         self.assertEqual(result.stdout, "one\nthree\n\n")
 
+    def test_doublenewline(self):
+        s = "one\ntwo\nthree\n"
+        result = self.r(["-C", "xyz\n"], s)
+        self.assertEqual(result.returncode, 0)
+        self.assertEqual(result.stderr, "")
+        self.assertEqual(result.stdout, "one\n\ntwo\n\nthree\n\n")
+
+    def test_doublenewline(self):
+        s = "one\ntwo\nthree\n"
+        result = self.r(["-C", "xyz\n", "-w"], s)
+        self.assertEqual(result.returncode, 0)
+        self.assertEqual(result.stderr, "")
+        self.assertEqual(result.stdout, "one\ntwo\nthree")
+
 
 if __name__ == "__main__":
     unittest.main()
