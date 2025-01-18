@@ -96,9 +96,6 @@ class Tests(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    with open('./rsrc/test1.txt', "w") as file:
-        file.write("\n\n\r\r\f\f  \v\v\t\thel\nl o")
-    
     unittest.main()
 
     
