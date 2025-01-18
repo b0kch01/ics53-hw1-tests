@@ -61,7 +61,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(result.stderr, "")
 
     def test_errorPriority(self):
-        result = self.r(["googoo gaga"], None)
+        result = self.r(["-Q", "{", "}o"], None)
         self.assertEqual(result.returncode, 1)
         self.assertIn(TEST_STR, result.stderr)
         self.assertEqual(result.stdout, "")
