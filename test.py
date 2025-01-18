@@ -80,9 +80,22 @@ class Tests(unittest.TestCase):
         self.assertIn(TEST_STR, result.stderr)
         self.assertEqual(result.stdout, "")
 
+    def test_trailingnewlinesC(self):
+        s = "\n\n\r\r\f\f  \v\v\t\thel\nl o"
+        result = self.r(["-C", "l", "-w"], s)
+        self.assertEqual(result.returncode, 0)
+        self.assertEqual(result.stderr, "")
+        self.assertEqual(result.stdout, "hel\nl\no")
+
 
 if __name__ == "__main__":
+    with open('./rsrc/test1.txt', "w") as file:
+        file.write("\n\n\r\r\f\f  \v\v\t\thel\nl o")
+    
     unittest.main()
+
+    
+        
 
 
 
